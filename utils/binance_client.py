@@ -18,7 +18,6 @@ class BinanceClient(Client):
                  requests_params: Dict[str, str] = None, testnet: bool = False
                  ):
         super(BinanceClient, self).__init__(api_key=api_key, api_secret=api_secret, requests_params=requests_params, testnet=testnet)
-        self.balances = self.get_balances()
 
     def get_balances(self):
         """
@@ -36,7 +35,27 @@ class BinanceClient(Client):
         return symbols
 
     def reformat_klines(self, symbol, interval, start_time: int = None, end_time: int = None, limit: int = None):
-        """create pd.DataFrame and change data type of columns"""
+        """create pd.DataFrame and change data type of columns
+        
+        Response format from Binance API:
+        [
+            [
+                1499040000000,      // Kline open time
+                "0.01634790",       // Open price
+                "0.80000000",       // High price
+                "0.01575800",       // Low price
+                "0.01577100",       // Close price
+                "148976.11427815",  // Volume
+                1499644799999,      // Kline Close time
+                "2434.19055334",    // Quote asset volume
+                308,                // Number of trades
+                "1756.87402397",    // Taker buy base asset volume
+                "28.46694368",      // Taker buy quote asset volume
+                "0"                 // Unused field, ignore.
+            ]
+        ]
+        """
+
         # get klines information
         if start_time and end_time:
             klines_info = self.get_klines(symbol=symbol, interval=interval, startTime=start_time, endTime=end_time)
