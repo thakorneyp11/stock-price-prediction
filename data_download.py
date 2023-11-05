@@ -22,6 +22,8 @@ Data format from Binance Data Dumper:
 ]
 """
 
+import os
+import pandas as pd
 from binance_historical_data import BinanceDataDumper
 
 
@@ -39,3 +41,19 @@ data_dumper.dump_data(
     date_end=None,  # `None` means up to the latest date
     is_to_update_existing=True
 )
+
+# get all csv paths
+csv_directory = "spot/monthly/klines/BTCUSDT/15m"
+csv_paths = [os.path.join(csv_directory, csv) for csv in os.listdir(csv_directory)]
+csv_paths = sorted(csv_paths)
+
+# read all `csv_paths` into dataframes and concat them together
+dfs = list()
+for csv_path in csv_paths:
+    df = pd.read_csv(csv_path)
+    df.columns = ['open_time', 'open_price', 'high_price', 'low_price', 'close_price', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trade', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore']
+    dfs.append(df)  
+
+# export to csv
+df_all = pd.concat(dfs)
+df_all.to_csv("dataset/BTCUSDT_15m_Aug2017-Oct2023.csv", index=False)
