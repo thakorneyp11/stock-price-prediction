@@ -40,7 +40,25 @@ An **end-to-end Machine Learning workflow** focused on stock price forecasting. 
 </details>
 
 
-<!-- ## ⚙️ Setting up -->
+## ⚙️ Setting up
+```bash
+# clone this repository
+git clone https://github.com/thakorneyp11/stock-price-prediction.git
+
+# change directory to project
+cd stock-price-prediction
+
+# create virtual environment (`pip3 install virtualenv` if not installed)
+virtualenv env
+
+# activate virtual environment
+source env/bin/activate
+
+# install dependencies
+pip3 install -r requirements.txt
+```
+
+
 <!-- ## 💾 Database -->
 <!-- ## 📊 Data/Payload Schema -->
 
@@ -55,21 +73,39 @@ An **end-to-end Machine Learning workflow** focused on stock price forecasting. 
 
 **Download Historical Data:**
 - Download historical data from Binance Data Dumper: `python3 data_download.py`
+- Raw CSV dataset: `dataset/BTCUSDT_15m_Aug2017-Oct2023.csv`
 
 **Retrieve Real-time Data:**
 - sample script can be found in `data_retrieval.py` (later will scheduled executed using MageAI)
+- <u>note</u>: need to update `.env` file with Binance API key and secret
+
+<img width="1000" alt="Raw CSV dataset" src="https://github.com/thakorneyp11/stock-price-prediction/assets/58812639/4961dd43-c409-4416-9552-773de503d6fd">
 
 ## 2. Feature Engineering
+- Exploratory Data Analysis (EDA): `eda.ipynb`
+- Feature Engineering: `feature_engineering.ipynb` ([reference](https://github.com/mcvoramet/altoacademy-feature-engineering))
+- Processed CSV dataset: 1) `dataset/feature_extracted_data.csv` and 2) `dataset/feature_selected_data.csv`
+
+**EDA results:**
+<img width="1000" alt="EDA results" src="https://github.com/thakorneyp11/stock-price-prediction/assets/58812639/de9582af-dcc6-47ec-b7e9-5f65e55ad89f">
+
+**Feature Engineering results:**
+<img width="1000" alt="Feature Engineering results" src="https://github.com/thakorneyp11/stock-price-prediction/assets/58812639/82020337-9764-4f13-be15-cdc6826ebf5b">
+
+## 3. Data Versioning
 - Coming soon
 
-## 3. Model Training
+## 4. Model Training
 - Coming soon
 
-## 4. Model Serving
+## 5. Model Serving
 - Coming soon
 
-## 5. Model Observability
+## 6. ML Pipeline
 - Coming soon
 
-## 6. Model Auto-Retraining
+## 7. Model Observability
+- Coming soon
+
+## 8. Model Auto-Retraining
 - Coming soon
