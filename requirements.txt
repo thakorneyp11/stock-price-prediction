@@ -1,6 +1,13 @@
 binance-historical-data==0.1.13
+matplotlib==3.8.1
 numpy==1.21.4
 pandas==1.3.5
 pendulum==2.1.2
+plotly==5.18.0
 python-binance==1.0.15
 python-dotenv==1.0.0
+scikit-learn==1.3.2
+scipy==1.11.3
+seaborn==0.13.0
+statsmodels==0.14.0
+ta==0.11.0
